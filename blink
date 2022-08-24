@@ -1,0 +1,56 @@
+const int LED = 11;
+const int BUTTON = 10;
+int val = 0;
+int oldVal = 0;
+int state = 0;
+
+void setup()
+{
+  //LED defined.
+  pinMode(LED, OUTPUT);
+  //Button defined.
+  pinMode(BUTTON, INPUT);
+}
+
+void loop()
+{
+  //call function.
+  buttonHandler();
+}
+
+//read a button press and assign a state.
+void buttonHandler()
+{
+  //read and assign button Press
+  val= digitalRead(BUTTON);
+  
+  //if val is 1 && oldVal is 0
+  if ((val == HIGH) && (oldVal == LOW))
+  {
+    //assign a value to state
+    state = 1-state;
+   	delay(10);
+  }
+  //assign val to oldVal to 'save' the state.
+  oldVal = val;
+  
+  //run event handling.
+  stateCheck();
+  
+}
+
+//LED event handling.
+void stateCheck()
+{
+  	//if state == 1 turn LED on.
+	if (state == 1)
+    {
+    	digitalWrite(LED, HIGH);
+  	} 
+  	//else turn LED off.
+  	else 
+  	{
+  		digitalWrite(LED, LOW); 	 
+  	}
+}
+	
